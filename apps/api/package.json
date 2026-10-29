@@ -1,0 +1,24 @@
+{
+  "name": "@grupo-nodos/api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node --env-file=../../.env ../../node_modules/@nestjs/cli/bin/nest.js start",
+    "start:dev": "node --env-file=../../.env ../../node_modules/@nestjs/cli/bin/nest.js start --watch",
+    "build": "nest build",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test:otp": "npm run build && node --test test/email-code.service.test.cjs",
+    "smtp:verify": "node --env-file=../../.env scripts/verify-smtp.cjs"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/platform-express": "^11.0.0",
+    "nodemailer": "^10.3.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^8.0.2"
+  }
+}

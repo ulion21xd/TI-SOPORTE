@@ -1,0 +1,37 @@
+{
+  "name": "grupo-nodos-it-management",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n api,admin,bot -c blue,green,magenta \"npm:dev:api\" \"npm:dev:admin\" \"npm:dev:bot\"",
+    "dev:api": "npm run start:dev --workspace @grupo-nodos/api",
+    "dev:admin": "npm run dev --workspace @grupo-nodos/admin-web",
+    "dev:bot": "npm run start:dev --workspace @grupo-nodos/whatsapp-bot",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "prisma:generate": "prisma generate",
+    "prisma:validate": "prisma validate",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.0",
+    "@nestjs/schematics": "^11.0.0",
+    "concurrently": "^9.1.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.0",
+    "prisma": "^6.19.0",
+    "typescript": "^5.8.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}

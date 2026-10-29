@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: grupo-nodos-it-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-it_management}
+      POSTGRES_USER: ${POSTGRES_USER:-it_management}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-it_management_dev}
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-it_management} -d ${POSTGRES_DB:-it_management}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:
